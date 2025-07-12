@@ -8,7 +8,7 @@ from app.services.profile import build_profile_text
 router = Router()
 
 
-@router.message(F.text == 'Профиль')
+@router.message(F.text == 'Профиль 👥')
 async def profile(msg: Message):
     async with SessionLocal() as db:
         user = await get_user_by_tg(msg.from_user.id, db)

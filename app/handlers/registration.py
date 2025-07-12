@@ -23,7 +23,7 @@ async def ask_name(msg: Message, state: FSMContext):
             return
 
     await msg.answer(
-        'Давай знакомиться! 😀\nНапиши *имя и фамилию* одним сообщением, например: `Лена Головач`', parse_mode='Markdown', reply_markup=ReplyKeyboardRemove())
+        'Давай знакомиться! 😀\nНапиши *имя и фамилию* одним сообщением, например: *Иван Иванов*', parse_mode='Markdown', reply_markup=ReplyKeyboardRemove())
     await state.set_state(Reg.waiting_name)
 
 
@@ -39,5 +39,5 @@ async def save_name(msg: Message, state: FSMContext):
         await create_user(msg.from_user, first, last, db)
 
     await msg.answer(
-        f'Спасибо, *{first}*! Ты с нами ✅\nНажми «Встретиться ☕️», чтобы найти собеседника.', parse_mode='Markdown', reply_markup=main_buttons)
+        f'Спасибо, *{first}*! Ты с нами 🤝✅\nНажми «Встретиться ☕️», чтобы найти собеседника.', parse_mode='Markdown', reply_markup=main_buttons)
     await state.clear()

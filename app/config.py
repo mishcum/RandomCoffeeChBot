@@ -9,7 +9,7 @@ load_dotenv(BASE_DIR / '.env')
 class Settings:
     BOT_TOKEN: str = os.getenv('BOT_TOKEN')
     DB_URL: str = os.getenv('DB_URL')
-    LOG_LEVEL: str = os.getenv('LOG_LEVEL', 'INFO')
+    LOG_LEVEL: str = os.getenv('LOG_LEVEL', 'DEBUG')
 
     class Config: 
         env_file = '.env'

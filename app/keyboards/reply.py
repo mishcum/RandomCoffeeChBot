@@ -6,7 +6,10 @@ reg_button = ReplyKeyboardMarkup(
 )
 
 main_buttons = ReplyKeyboardMarkup(
-    keyboard=[[KeyboardButton(text='Встретиться ☕️')],
-              [KeyboardButton(text='Профиль'), KeyboardButton(text='Инфо ℹ️')]],
-    resize_keyboard=True
+    keyboard=[
+        [KeyboardButton(text='Встретиться ☕️')],
+        [KeyboardButton(text='Профиль 👥'), KeyboardButton(text='Инфо ℹ️')],
+        [KeyboardButton(text='Выбрать офис 🏢')]
+    ],
+    resize_keyboard=True,
 )

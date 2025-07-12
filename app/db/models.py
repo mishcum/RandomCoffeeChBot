@@ -4,7 +4,7 @@ from sqlalchemy import Integer, BigInteger, Text, DateTime, CheckConstraint, For
 from datetime import datetime
 from sqlalchemy.sql import func
 
-from app.db.enums import MeetingStatus
+from app.db.enums import MeetingStatus, Office
 
 class Base(AsyncAttrs, DeclarativeBase):
     pass
@@ -19,6 +19,7 @@ class User(Base):
     last_name: Mapped[str] = mapped_column(Text)
     registered: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=func.now())
     meetings_count: Mapped[int] = mapped_column(Integer, default=0)
+    office: Mapped[Office] = mapped_column(Enum(Office), nullable=False, default=Office.all_.value)
 
     meetings_as_a: Mapped[list['Meeting']] = relationship(back_populates='user_a', cascade='all, delete-orphan', foreign_keys='Meeting.user_a_id')
     meetings_as_b: Mapped[list['Meeting']] = relationship(back_populates='user_b', cascade='all, delete-orphan', foreign_keys='Meeting.user_b_id')

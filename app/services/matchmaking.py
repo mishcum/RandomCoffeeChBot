@@ -2,7 +2,7 @@ import random
 from sqlalchemy import select, and_, or_
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.models import User, Meeting
-from app.db.enums import MeetingStatus
+from app.db.enums import MeetingStatus, Office
 
 
 async def find_partner(me: User, db: AsyncSession) -> User | None:
@@ -21,11 +21,11 @@ async def find_partner(me: User, db: AsyncSession) -> User | None:
 
     blocked = blocked_a.union_all(blocked_b)
 
-    candidates = (await db.scalars(
-        select(User).where(
-            User.id != me.id,
-            ~User.id.in_(blocked)          
-        )
-    )).all()
+    candidates = select(User).where(User.id != me.id, ~User.id.in_(blocked))
+
+    if me.office != Office.all_:
+        candidates = candidates.where(User.office == me.office)
+
+    candidates = (await db.scalars(candidates)).all()
 
     return random.choice(candidates) if candidates else None

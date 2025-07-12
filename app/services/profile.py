@@ -7,7 +7,8 @@ def build_profile_text(user: User) -> str:
         'Твой профиль 🗒\n\n'
         f'*Имя:* {user.first_name}\n'
         f'*Фамилия:* {user.last_name}\n'
+        f'*Офис:* {user.office.value}\n'
         f'*Пользовательское имя:* {username_part}\n'
-        f'*Telegram-ID:* {user.tg_id}\n'
-        f'*Количество встреч:* __{user.meetings_count}__\n'
+        f'*Telegram-ID:* {user.tg_id}\n\n'
+        f'*Количество встреч:* __{user.meetings_count}__'
     )
