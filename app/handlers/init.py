@@ -4,6 +4,7 @@ from . import (
     profile,
     meet_command,
     meet_callbacks,
+    info,
     common
 )
 
@@ -13,6 +14,7 @@ def register_all(dp_router: Router):
         profile,
         meet_command,
         meet_callbacks,
+        info,
         common,
     ):
         dp_router.include_router(module.router)
