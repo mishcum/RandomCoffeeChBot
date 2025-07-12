@@ -1,3 +1,4 @@
+![](https://img.shields.io/badge/version-0.9.1-green)
 # ☕ Random Coffee Bot
 
 Telegram-бот, который случайно сводит людей на короткие встречи.
@@ -27,6 +28,8 @@ Telegram-бот, который случайно сводит людей на к
 ![Aiogram3](https://img.shields.io/badge/-Aiogram3-000?&logo=telegram)
 ![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-000?&logo=postgresql)
 ![SQLAlchemy](https://img.shields.io/badge/-SQLAlchemy-000?&logo=sqlalchemy)
+
+---
 
 ## 📝 License
 Apache License 2.0 © Поплевин Михаил
