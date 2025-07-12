@@ -18,6 +18,7 @@ class User(Base):
     first_name: Mapped[str] = mapped_column(Text)
     last_name: Mapped[str] = mapped_column(Text)
     registered: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=func.now())
+    meetings_count: Mapped[int] = mapped_column(Integer, default=0)
 
     meetings_as_a: Mapped[list['Meeting']] = relationship(back_populates='user_a', cascade='all, delete-orphan', foreign_keys='Meeting.user_a_id')
     meetings_as_b: Mapped[list['Meeting']] = relationship(back_populates='user_b', cascade='all, delete-orphan', foreign_keys='Meeting.user_b_id')

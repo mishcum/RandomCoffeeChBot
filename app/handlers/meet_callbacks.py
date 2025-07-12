@@ -1,6 +1,6 @@
 from aiogram import Router, F
 from aiogram.types import CallbackQuery
-from sqlalchemy import and_, or_, select
+from sqlalchemy import and_, or_, select, update
 from sqlalchemy.sql import func
 
 from app.keyboards.inline import answer_request_kb
@@ -63,15 +63,13 @@ async def meet_response(cb: CallbackQuery):
         initiator = await db.get(User, meet.user_a_id)
         partner = await db.get(User, meet.user_b_id)
 
-        contacts_text = (
-            f'🎉 Встреча подтверждена!\n'
-            f'Свяжитесь друг с другом:\n'
-            f'• @{initiator.username or '—'} – {initiator.first_name}\n'
-            f'• @{partner.username or '—'} – {partner.first_name}'
-        )
+        contacts_text = f"🎉 Встреча подтверждена!\nСвяжитесь друг с другом:\n• @{initiator.username or '—'} – {initiator.first_name}\n• @{partner.username or '—'} – {partner.first_name}"
 
         if action == 'meet_accept':
             meet.status = MeetingStatus.confirmed
+            await db.execute(update(User).where(User.id.in_([initiator.id, partner.id])).values(
+                meetings_count=User.meetings_count + 1
+            ))
             await db.flush()
 
             await cb.bot.send_message(initiator.tg_id, contacts_text, parse_mode='Markdown')
